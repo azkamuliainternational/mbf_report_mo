@@ -11,10 +11,13 @@ class MrpProduction(models.Model):
         store=True,  # Optional: Set to True if you want the field value to be stored in the database
         readonly=False  # Optional: Set to False if you want users to be able to edit this field manually
     )
-    shift = fields.Char(
-        'Shift',
-        help="Reference of the document that generated this production order request.")
-
+    shift = fields.Selection([
+        ('1', 'Shift 1'),
+        ('2', 'Shift 2'),
+        ('3', 'Shift 3')],default ='1',string='Pilihan Shift',
+        help="pilihan shift kerja operator")
+    rekap_ids = fields.One2many('mrp.rekap.produksi', 'mrp_id',
+        string="Rekapitulasi Produksi")
 # class ./(models.Model):
 #     _name = './../'
 
