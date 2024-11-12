@@ -1,60 +1,32 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-    <!--
-    <record model="ir.ui.view" id="./.list">
-      <field name="name">./ list</field>
-      <field name="model">./../</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
+   <record id="view_mrp_production_form_inherit_no_lot" model="ir.ui.view">
+        <field name="name">mrp.production.form.inherit.no.lot</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Add the 'no_lot' field after the 'product_id' field -->
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="no_lot_mo"/>
+            </xpath>
+        </field>
     </record>
-    -->
 
-    <!-- actions opening views on models -->
-    <!--
-    <record model="ir.actions.act_window" id="./.action_window">
-      <field name="name">./ window</field>
-      <field name="res_model">./../</field>
-      <field name="view_mode">tree,form</field>
+    <record id="mrp_pencatatan_lot" model="ir.actions.act_url">
+          <field name="name">Template Report Pencatatan LOT</field>
+          <field name="url">/mbf_report_mo/static/src/Form_mo.pdf</field> <!-- Your target URL -->
+          <field name="target">new</field> <!-- Options: "self" or "new" -->
     </record>
-    -->
 
-    <!-- server action to the one above -->
-    <!--
-    <record model="ir.actions.server" id="./.action_server">
-      <field name="name">./ server</field>
-      <field name="model_id" ref="model_./_./"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": self._name,
-        }
-      </field>
-    </record>
-    -->
+     <menuitem id="menu_mrp_production_report_mo"
+          name="Template Report Pencatatan Lot"
+          parent="mrp.menu_mrp_reporting"
+          action="mrp_pencatatan_lot"
+          sequence="12"/>  
 
-    <!-- Top menu item -->
-    <!--
-    <menuitem name="./" id="./.menu_root"/>
-    -->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="./.menu_1" parent="./.menu_root"/>
-    <menuitem name="Menu 2" id="./.menu_2" parent="./.menu_root"/>
-    -->
-    <!-- actions -->
-    <!--
-    <menuitem name="List" id="./.menu_1_list" parent="./.menu_1"
-              action="./.action_window"/>
-    <menuitem name="Server to list" id="./" parent="./.menu_2"
-              action="./.action_server"/>
-    -->
+
+
+
+
   </data>
 </odoo>
