@@ -14,10 +14,34 @@ class MrpProduction(models.Model):
     shift = fields.Selection([
         ('1', 'Shift 1'),
         ('2', 'Shift 2'),
-        ('3', 'Shift 3')],default ='1',string='Pilihan Shift',
+        ('3', 'Shift 3')],default ='1',string='Shift Produksi',
         help="pilihan shift kerja operator")
+    umur_produk = fields.Selection([
+        ('1', '1 Tahun'),
+        ('2', '2 Tahun'),
+        ('3', '3 Tahun'),
+        ('4', '4 Tahun'),
+        ('5', '5 Tahun')        
+        ],default ='3',string='Umur Produk',
+        help="Umur Produk")
     rekap_ids = fields.One2many('mrp.rekap.produksi', 'mrp_id',
         string="Rekapitulasi Produksi")
+    persiapan_ids = fields.One2many('mrp.persiapan', 'mrp_id',
+        string="Persiapan Produksi")
+    proses_produksi_ids = fields.One2many('mrp.proses_produksi', 'mrp_id',
+        string="Persiapan Produksi")
+    
+    nie = fields.Char(
+        related='product_tmpl_id.hs_code',
+        string='NIE'
+    )
+    nama_mesin = fields.Char(
+                string='Nama Mesin'
+    )
+    nama_operator = fields.Char(
+                string='Nama Operator'
+    )
+
 # class ./(models.Model):
 #     _name = './../'
 

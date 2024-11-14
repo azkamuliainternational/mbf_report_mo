@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_mrp_rekap_produksi_manager,access_mrp_rekap_produksi_manager,model_mrp_rekap_produksi,base.group_system,1,1,1,1
+access_mrp_persiapan_manager,access_persiapan_manager,model_mrp_persiapan,base.group_system,1,1,1,1
+access_mrp_proses_produksi_manager,access_proses_produksi_manager,model_mrp_proses_produksi,base.group_system,1,1,1,1

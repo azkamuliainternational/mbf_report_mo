@@ -7,15 +7,95 @@
         <field name="arch" type="xml">
             <!-- Add the 'no_lot' field after the 'product_id' field -->
             <data>
-            <xpath expr="//field[@name='origin']" position="after">
+
+            <xpath expr="//field[@name='quantity_done']" position="after">
+          <field name="no_lot"/>
+            </xpath>
+
+              
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                  <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="attributes">
+             <attribute name="invisible">True</attribute>
+            </xpath>
+            
+                <xpath expr="//field[@name='routing_id']" position="after">
+                <field name="nie" />
+                  <field name="user_id"/>
+                  <field name="origin"/>
+            </xpath>
+
+
+
+
+               <xpath expr="//field[@name='date_planned_start']" position="before">
                 <field name="no_lot_mo" options="{'no_create': True, 'no_create_edit':True}"/>
+            </xpath>
+            <xpath expr="//field[@name='date_planned_start']" position="after">                
                 <field name="shift"/>
+                <field name="umur_produk"/>
+                <field name="nama_mesin"/>
+                <field name="nama_operator"/>
+
 
             </xpath>
-            <xpath expr="//field[@name='picking_type_id']/ancestor::page" position="after">
-                <page string="Rekapitulasi Produksi">
+            <xpath expr="//field[@name='move_raw_ids']/ancestor::page" position="after">
+                <page string="A.LINE CLEARANCE DAN PERSIAPAN">
+             <div>1.Ruangan yang digunakan sudah bersih, tidak ada dokumen maupun produk lain selain LOT <br/>
+             2.Pantau suhu dan kelembapan ruangan yang terbaca di thermohygro ruangan (Persyaratan : Suhu = 20°C - 27°C ; RH = 40% - 65%)<br/>
+             </div>
+              <div>
+            <group>
+                  <field name="persiapan_ids" >
+                                  <tree  editable="bottom"  >
+                                    <field name="shift" />
+                                    <field name="suhu"/>
+                                    <field name="kelembaban" />
+                                 </tree>
+                   </field>
+          </group>          
+          <group>
+            </group>
+            </div>      
+            <div>
+             3.Meja mesin dan alat (box container blank, pinset, dll) yang akan digunakan sudah bersih (area kontak produk harus didisinfektan)<br/>
+             4.Lakukan persiapan : setting printer dan cetak No. Lot, Mfg. Date dan Exp. Date produk pada innerbox, berikutnya bentuk innerbox
+juga outerbox jadi siap pakai
+
+             </div>
+
+                </page>
+                
+<page string="B.PROSES PRODUKSI BLANK">
+             <div>1.Pasang roll material sesuai lokasi masing-masing dan pastikan komposisi sesuai dengan standar produk<br/>
+             2.Jalankan mesin sesuai dengan IK operasional mesin yang bersangkutan(Nama Mesin :<field name="nama_mesin" nolabel="1" attrs="{'readonly': True}"/>
+                    )<br/>
+             </div>
+              <div>
+            <group>
+                 <field name="proses_produksi_ids" >
+                                  <tree  editable="bottom"  >
+                                    <field name="shift" />
+                                    <field name="speed"/>
+                                 </tree>
+                   </field>
+
+          </group>          
+          <group>
+            </group>
+            </div>      
+            <div>
+             3.Pastikan ouput blank sudah sesuai penerimaan melalui pengecekan QC/ Tim Leader yang bertugas
+
+             </div>
+
+                </page>
+
+
+                <page string=" E.Rekapitulasi Produksi">
                             <field name="rekap_ids" >
-                                 <tree  editable="bottom" create="0" delete="0" >
+                                 <tree  editable="bottom"  >
                                     <field name="jam_mulai" />
                                     <field name="jam_selesai"/>
                                     <field name="awal" />
